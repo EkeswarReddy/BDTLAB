@@ -1,0 +1,431 @@
+####################
+1st
+
+n <- as.integer(readline(prompt = "Enter no of students")) # Read No of students
+# Declare the vector of character of length n
+USN <- vector(mode="character", length= n) 
+Name <- vector(mode="character", length= n)
+Marks <- vector(mode="numeric", length= n)
+
+#Read the elements of the vector
+print("Enter USN")
+for (i in 1:n)
+  USN[i] <- as.character(readline())
+print("Enter Name")
+for (i in 1:n)
+  Name [i] <- readline()
+print("Enter Marks" )
+for (i in 1:n)
+  Marks[i] <- as.integer(readline())
+
+#Construct the data frame from the vectors
+student <- data.frame(USN,Name,Marks)
+print("The Student detials are as follows")
+print(student) # Display data frame
+
+print("Enter Age")  # Read the vector of Age
+Age <- vector(mode="integer", length=n)
+for (i in 1:n)
+  Age [i] <- readline()
+student <- cbind(student,Age) # Append the vector to the data frame
+
+print(student)
+
+stud=subset(student,Age>19 & Marks>25)
+print(stud)
+
+################################################
+2nd
+n <- as.integer(readline(prompt = "Enter the no of employees : "))
+
+EmpId <- vector(mode = "character", length = n)
+EmpName <- vector(mode = "character", length = n)
+DOJ <- vector(mode = "character", length = n)
+EmpCode <- vector(mode = "character", length = n)
+Desig <- vector(mode = "character", length = n)
+Dept <- vector(mode = "character", length = n)
+
+for (i in 1:n)
+  EmpId[i] <- as.character(readline())
+print("Enter EmployeeName")
+for (i in 1:n)
+  EmpName [i] <- readline()
+print("Enter DOJ" )
+for (i in 1:n)
+  DOJ[i] <- (readline())
+print("Enter EmployeeCode" )
+for (i in 1:n)
+  EmpCode[i] <- as.integer(readline())
+print("Enter Designation" )
+for (i in 1:n)
+  Desig[i] <- (readline())
+print("Enter Dept" )
+for (i in 1:n)
+  Dept[i] <- (readline())
+
+Emp <- data.frame(EmpId,EmpName,EmpCode,Desig,Dept,DOJ)
+
+print("The Employee detials are as follows")
+print(Emp)
+
+write.csv(Emp,"C:/Users/adity/Desktop/2nd.csv")
+
+
+readStudent=read.csv("C:/Users/adity/Desktop/2nd.csv")
+
+print("Enter a new row")
+u<- readline(prompt = "EmpId")
+n<- readline(prompt = "EmpName")
+m<- readline(prompt = "EmpCode")
+A<- readline(prompt = "Desig")
+s<- readline(prompt = "Dept")
+t<- readline(prompt = "DOJ")
+
+x<- data.frame(u,n,m,A,s,t)
+
+write.table(x,"C:/Users/adity/Desktop/2nd.csv",col.names = FALSE,  append = T,row.names = T, quote= FALSE, sep = ",")
+n <- as.integer(readline(prompt = "Enter no of Employee"))
+EmpId <- vector(mode="character", length= n)
+EmpName <- vector(mode="character", length= n)
+DOJ <- vector(mode="character", length= n)
+EmpCode <- vector(mode="numeric",length = n)
+Desig <- vector(mode="character",length = n)
+Dept <- vector(mode="character",length = n)
+z= read.csv("C:/Users/adity/Desktop/2nd.csv")
+print("Enter EmpId")
+print(z)
+
+
+########################################
+3rd
+
+data()
+data(mtcars)
+head(mtcars)
+
+rows <- nrow(mtcars)
+cols <- ncol(mtcars)
+print(rows)
+print(cols)
+
+x <- data.frame(mtcars)
+
+automatic <- 0
+manual <- 0
+
+for(i in 1:rows)
+  ifelse(x[i, 9] == 1, automatic <- automatic + 1, manual <- manual + 1)
+
+ifelse(automatic > manual, print("A"), print("M"))
+
+scatter.smooth(mtcars$hp, mtcars$wt)
+
+x[, 2] <- as.integer(x[, 9])
+x[, 8] <- as.integer(x[, 9])
+x[, 9] <- as.integer(x[, 9])
+
+newmtc <- data.frame(x)
+dim(newmtc)
+
+sapply(newmtc[2], class)
+sapply(newmtc[8], class)
+sapply(newmtc[9], class)
+
+z  <- subset(newmtc, cyl < 5)
+z
+
+###################################################
+4th
+
+#a
+df=datasets::airquality
+print(dim(df))
+sapply(df,class)
+print("missing values")
+x=colSums(is.na(df))
+print(x)
+y=colMeans(df,na.rm = TRUE)
+print(y)
+r=nrow(df)
+c=ncol(df)
+
+for(i in 1:r)
+{
+  for(j in 1:c)
+  {
+    if(is.na(df[i,j]))
+    {
+      df1[i,j]<- mean(df[,j],na.rm = TRUE)
+    }
+  }
+}
+print(df1)
+#e
+df2=na.omit(df)
+print(df2)
+
+
+###################################################
+5th
+
+
+import scala.io.Source
+object scalaWordCount{
+	def main(args: Array[String]){
+		if(args.length != 1){
+			System.err.println("Usage: sbt run \"word.txt\"")
+			System.exit(1)
+		}
+		val filename=args(0)
+		val wordcount = scala.collection.mutable.Map[String,Int]()
+		for(line<-Source.fromFile("words.txt").getLines)
+			for(word <- line.split(" "))
+				wordcount(word) = if(wordcount.contains(word)) wordcount(word) + 1 else 1
+			
+		for((k,v) <- wordcount)
+			printf("Word %s occurs %d times\n", k,v)
+		println(wordcount)
+	}
+}
+
+
+#############################################################
+6th
+
+import scala.io.StdIn
+import scala.collection.mutable.ArrayBuffer
+
+object MinMax {
+
+	def main (args: Array[String] ): Unit = {
+		var numArray = new ArrayBuffer[Int]()
+		println("Enter number of elements")
+		val n = scala.io.StdIn.readInt()		//Read the number of items in Array
+		println("Enter elements")
+		for (i <- 1 to n)				//Read the array elements
+			numArray += scala.io.StdIn.readInt()
+		println(numArray)				//Display the array elements
+	
+	val t = minmax(numArray) 				// Returned value will be tuple
+	println("Maximum number is ", t._1)			//Display the maximum
+	println("Minimum number is ", t._2)			//Display the minimum
+	}
+	
+	def minmax(numArray:ArrayBuffer[Int]): (Int,Int) = {
+
+		var mi:Int = 999				//Initialize minumum and maximum
+		var mx:Int = -999
+		for ( i <- numArray)
+		{
+			if (i < mi)
+				mi = i
+			else if (i > mx)
+				mx = i
+		}
+		(mx,mi)						//Return mx and mn as items of tuple
+	}	
+}
+		
+
+###############################################################
+
+7th
+
+object scalasort {
+
+  def sort(a: List[Int]): List[Int] = {
+    if (a.length < 2) a
+    else {
+      val pivot = a(a.length / 2)
+      sort(a.filter(_ < pivot)) :::
+      a.filter(_ == pivot) :::
+      sort(a.filter(_ > pivot))
+    }
+  }
+
+  def sort1(a:Array[Int])  {
+  
+  	def swap ( l:Int,r:Int) {
+  		val t = a(l) ; a(l) = a (r) ; a(r) = t
+  		}
+  		
+  	def sort2(l:Int, r:Int) {
+  		val pivot = a((l+r)/2)
+		var i =l
+		var j = r
+		while (i <= j) {
+			while (a(i) < pivot ) i += 1
+			while (a(j) > pivot) j -= 1
+			if (i <= j) {
+				swap (i,j)
+				i += 1
+				j -= 1
+				}
+			}
+			if(l < j) sort2(l,j)
+			if(j < r) sort2(i,r)
+		}
+	if (a.length > 0)
+		sort2(0,a.length-1)
+}
+
+  def main(args: Array[String]) {
+
+    val xs = List(6, 2, 8, 5, 1)
+    println(xs)
+    println("Sorted List using the functional style")
+    println(sort(xs))
+
+    val xs2 = Array(61,21,81,51,11)
+    sort1(xs2)
+    println("Sorted array using Imperative method")
+	for (ele <- xs2)
+		println(ele)
+
+  }
+}
+
+#####################################################################
+ 8th
+
+abstract class Notification
+
+case class SMS(mobile:String, msg: String) extends Notification 
+
+case class Email(emailAddr: String, subject: String, body: String) extends Notification 
+
+object temp{
+
+def showNotification(notification: Notification): String = {
+  notification match {
+    case Email(emailAddr, subject, _) =>
+      s"You got an email from $emailAddr with subject: $subject"
+    case SMS(number, message) =>
+      s"You got an SMS from $number! Message: $message"
+  }
+}
+
+// Test by creating an SMS instance and a Email instance.
+
+def main(args:Array[String]): Unit = {
+val someSms = SMS("12345", "Are you there?")
+val someEmail = Email("subhrajit.b@nmit.ac.in", "Big Data Course Syllabus",
+  "Intro to Big Data, NOSQL Databases, Spark RDDs, SQL, Streaming")
+
+println(showNotification(someSms))  
+
+println(showNotification(someEmail)) 
+} 
+}
+
+#####################################################################
+9th
+
+
+#wordcount.scala
+import org.apache.spark.SparkContext
+import org.apache.spark.SparkConf
+import org.apache.spark.rdd.RDD
+
+object wordcount {
+
+  def main(args: Array[String]) {
+
+    val pathToFile = "log.txt"
+
+    val conf = new SparkConf().setAppName("Wordcount").setMaster("local[*]")
+
+    val sc = new SparkContext(conf)
+
+    val wordsRdd = sc.textFile(pathToFile).flatMap(_.split(" "))
+
+    val wordCountInitRdd = wordsRdd.map(word => (word, 1))
+
+    val wordCountRdd = wordCountInitRdd.reduceByKey((v1, v2) => v1 + v2)
+    
+    val highFreqWords = wordCountRdd.filter(x => x._2 > 2)
+
+    highFreqWords.saveAsTextFile("wordcountsDir")
+  }
+}
+
+#wordcount.sbt
+name := "WordCount"
+ 
+version := "1.0"
+ 
+scalaVersion := "2.11.12"
+ 
+libraryDependencies += "org.apache.spark" %% "spark-core" % "2.3.0"
+
+#######################################################
+
+10th
+
+#tweet.scala
+import org.apache.spark.{SparkConf, SparkContext}
+import org.apache.spark.rdd._
+
+import scala.Ordering
+
+
+object tweet {
+
+
+  val conf = new SparkConf()
+    .setAppName("User mining")
+    .setMaster("local[*]")
+
+  val sc = new SparkContext(conf)
+
+
+  var pathToFile = "/home/student/navya/rt.json"
+
+  def main(args: Array[String]) {
+
+    val tweets =
+      sc.textFile(pathToFile).mapPartitions(TweetUtils.parseFromJson(_))
+    val tweets_user = tweets.map(x=> (x.user, x)).groupByKey()
+    tweets.take(0).foreach{case (tweet) => println(tweet.user)}
+    val num = tweets_user.map(x => (x._1, x._2.size))
+    val sortedUsersByNumTweets = num.sortBy(_._2, ascending = false)
+    sortedUsersByNumTweets.take(10).foreach(println)
+
+  }
+}
+
+import com.google.gson._
+
+object TweetUtils {
+  case class Tweet (
+                     id : String,
+                     user : String,
+                     userName : String,
+                     text : String,
+                     place : String,
+                     country : String,
+                     lang : String
+                   )
+
+
+  def parseFromJson(lines:Iterator[String]):Iterator[Tweet] = {
+    val gson = new Gson
+    lines.map(line => gson.fromJson(line, classOf[Tweet]))
+  }
+}
+
+
+#build.sbt
+
+name := "sparkprogram"
+
+version := "0.1"
+
+scalaVersion := "2.12.10"
+
+libraryDependencies += "org.apache.spark" %% "spark-sql" % "3.1.2"
+libraryDependencies += "com.google.code.gson" % "gson" % "2.3.1"
+
+
+
+
